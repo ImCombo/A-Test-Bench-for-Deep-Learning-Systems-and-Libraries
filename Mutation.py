@@ -111,7 +111,7 @@ def background_removal(image_path, label_path, write_path):
         
     start = time.time()
     image = 0
-    for id in label_list[:2000]:
+    for id in label_list:
         image += 1
         if image % 1000 == 0:
             print("Done",image, "images")

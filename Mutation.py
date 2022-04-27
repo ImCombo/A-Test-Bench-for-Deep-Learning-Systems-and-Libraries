@@ -653,10 +653,19 @@ def log(s):
     f.write(s+'\n')
     f.close()
 
+    
 # This function generates the RESIZE set, each object is enlarged up to size within the boundary and placed in the center.
-# sizes: array of float containing the result sizes of the object, e.g. [0.05], [0.05, 0.10]
+'''
+object_insertion generate mutated images by inserting a non-hand object
+image_path: path to the directory that stores the images to be mutated
+label_path: path to the directory that stores the labels of the images. 
+            Each label should has the same name as its associated image
+write_path: path to the directory that stores the mutated images
+sizes: array of float containing the result sizes of the object, e.g. [0.05], [0.05, 0.10]
+'''
 
 def object_resize(image_path, label_path, write_path, sizes):
+    # check input and create path accordingly
     log('----------------------------------------')
     log(str(datetime.datetime.now())[5:10])
     log('start object_resize')
@@ -681,6 +690,8 @@ def object_resize(image_path, label_path, write_path, sizes):
     for size in sizes:
         if not os.path.exists('OBJ_RESIZE_'+str(size)):
             os.mkdir('OBJ_RESIZE_'+str(size)) 
+   
+    # start mutation
     num_image = 0
     start = time.time()
     for id in label_list:
